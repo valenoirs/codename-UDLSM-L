@@ -1,0 +1,25 @@
+<div class="row mt-5 mb-5"><br></div>
+<div class="row mt-5 justify-content-center">
+    <div class="col-5">
+        <form method="POST" action="/pembeli/login">
+            <h4 class="text-center text-secondary">LOGIN PEMBELI</h4>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Nama" id="nama" name="nama" required>
+            </div>
+            <div class="mb-3">
+                <input type="number" class="form-control" placeholder="No. HP" id="no_hp" name="no_hp" required>
+            </div>
+            <select class="form-select mb-3" id="no_meja" name="no_meja" aria-label="Default select example">
+                <% data.forEach(meja => { %>
+                    <option value="<%= meja.no_meja %>">Meja <%= meja.no_meja %></option>
+                <% }) %>
+              </select>
+            <!-- <div class="mb-3">
+                <input type="number" class="form-control" placeholder="No. Meja" id="no_meja" name="no_meja" required>
+            </div> -->
+            <div class="d-grid text-center">
+                <button type="submit" class="btn btn-secondary">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

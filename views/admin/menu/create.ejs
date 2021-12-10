@@ -1,0 +1,23 @@
+<div class="row mt-5 mb-5"><br></div>
+<div class="row mt-5 justify-content-center">
+    <div class="col-5">
+        <form method="POST" action="/admin/menu" enctype="multipart/form-data">
+            <h4 class="text-center text-secondary">TAMBAH MENU</h4>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Nama" id="nama" name="nama" required>
+            </div>
+            <div class="mb-3">
+                <input type="number" class="form-control" placeholder="Harga" id="harga" name="harga" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Kategori" id="kategori" name="kategori" required>
+            </div>
+            <div class="mb-3">
+                <input type="file" class="form-control" id="sourceGambar" name="sourceGambar" required>
+            </div>
+            <div class="d-grid text-center">
+                <button type="submit" class="btn btn-secondary">Tambah</button>
+            </div>
+        </form>
+    </div>
+</div>

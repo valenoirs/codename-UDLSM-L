@@ -1,0 +1,66 @@
+<div class="row justify-content-between mt-4">
+    <div class="col">
+        <h2>Rumah Makan</h2>
+    </div>
+    <div class="col-3">
+        <form method="GET" action="/pembeli/logout">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')">Logout</button>
+        </form>
+</div>
+<hr>
+<div class="row justify-content-between mt-4">
+    <div class="col">
+        <a href="/pembeli/checkout" style="text-decoration: none;">
+            <img class="d-inline" src="https://cdn.pixabay.com/photo/2014/06/19/00/59/shopping-cart-371979_960_720.png" alt="keranjang" style="height: 40px; width: 47px;">
+            <h5 class="d-inline text-secondary text-muted">
+                <% if (keranjang.length) { %>
+                    <%= keranjang.map(keranjang => keranjang.jumlah).reduce((prev, next) => prev + next) %> items
+                <% } else {%>
+                    0 items
+                <% } %>
+            </h5>
+        </a>
+    </div>
+</div>
+<div class="row justify-content-center mt-4" style="overflow: auto;height: 440px;">
+  <table class="table">
+    <thead class="table-secondary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Menu</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Pesan</th>
+          </tr>
+        </thead>
+        <tbody class="align-middle">
+            <% data.forEach((menu,i) => { %>
+                <tr>
+                  <th scope="row"><%= i+1 %></th>
+                  <td>
+                      <img src="<%= menu.sourceGambar %>" alt="gambar_makanan" style="height: 100px; width: 100px;">
+                  </td>
+                  <td><%= menu.nama %></td>
+                  <td><%= menu.harga %></td>
+                  <td><%= menu.kategori %></td>
+                  <td>
+                    <form method="POST" action="/pembeli/pesan">
+                        <input type="hidden" name="menu" value="<%= menu.nama %>">
+                        <input type="hidden" name="harga" value="<%= menu.harga %>">
+                        <input type="hidden" name="total" value="<%= menu.harga %>">
+                        <input type="hidden" name="no_meja" value="<%= no_meja %>">
+                        <button type="submit" class="btn btn-success">Pesan</button>
+                    </form>
+                  </td>
+                </tr>
+            <% }) %>
+          </tbody>
+      </table>
+</div>
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+        <h5>Meja <%= no_meja %></h5>
+    </div>
+</div>

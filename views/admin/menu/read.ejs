@@ -1,0 +1,49 @@
+<div class="row justify-content-between mt-4">
+    <div class="col">
+        <h2>Data Menu</h2>
+    </div>
+    <div class="col-3">
+        <a href="/admin" style="text-decoration: none;">
+            <h2 class="text-secondary">Home</h2>
+        </a>
+    </div>
+</div>
+<hr>
+<div class="row justify-content-center mt-4">
+    <div class="col">
+        <a href="/admin/menu/tambah" class="btn btn-secondary">Tambah Menu</a>
+    </div>
+</div>
+<div class="row justify-content-center mt-4" style="overflow: auto;height: 450px;">
+  <table class="table">
+    <thead class="table-secondary">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Menu</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">More</th>
+        </tr>
+        </thead>
+        <tbody>
+            <% data.forEach((menu,i) => { %>
+                <tr>
+                    <th scope="row"><%= i+1 %></th>
+                    <td>
+                        <img src="<%= menu.sourceGambar %>" alt="gambar_makanan" style="height: 100px; width: 100px;">
+                    </td>
+                    <td><%= menu.nama %></td>
+                    <td><%= menu.harga %></td>
+                    <td><%= menu.kategori %></td>
+                  <td>
+                    <form method="POST" action="/admin/menu?_method=DELETE">
+                        <input type="hidden" id="menuId" name="menuId" value="<%= menu.menuId %>">
+                        <button type="submit" class="btn btn-secondary" onclick="return confirm('Are You Sure?')">Hapus</button>
+                      </form>
+                  </td>
+                </tr>
+            <% }) %>
+          </tbody>
+      </table>
+</div>

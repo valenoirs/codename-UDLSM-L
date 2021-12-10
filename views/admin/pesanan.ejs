@@ -1,0 +1,52 @@
+<div class="row justify-content-between mt-4">
+    <div class="col">
+        <h2>Data Pesanan</h2>
+    </div>
+    <div class="col-3">
+        <a href="/admin" style="text-decoration: none;">
+            <h2 class="text-secondary">Home</h2>
+        </a>
+    </div>
+</div>
+<hr>
+<div class="row justify-content-center mt-4" style="overflow: auto;height: 450px;">
+  <table class="table">
+    <thead class="table-secondary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">No Meja</th>
+            <th scope="col">Menu</th>
+            <th scope="col">Total</th>
+            <th scope="col">Status</th>
+            <th scope="col">Hapus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach((pesanan,i) => { %>
+            <tr>
+              <th scope="row"><%= i+1 %></th>
+              <td><%= pesanan.no_meja %></td>
+              <td><% pesanan.menu.forEach(menu => { %>
+               <%= menu %></br>
+              <% }) %></td>
+              <td><%= pesanan.total %></td>
+              <% if (pesanan.selesai) { %>
+                <td>Selamat Menikmati!</td>
+              <% } else { %>
+                <td>
+                  <form method="GET" action="/admin/pesanan/dihidangkan/<%= pesanan.pesananId %>">
+                    <button type="submit" class="btn btn-secondary">Dihidangkan</button>
+                  </form>
+                </td>
+              <% } %>
+            <td>
+              <form method="POST" action="/admin/pesanan?_method=DELETE">
+                <input type="hidden" id="pesananId" name="pesananId" value="<%= pesanan.pesananId %>">
+                <button type="submit" class="btn btn-secondary" onclick="return confirm('Are You Sure?')">Hapus</button>
+              </form>
+            </td>
+            </tr>
+          <% }) %>
+          </tbody>
+      </table>
+</div>

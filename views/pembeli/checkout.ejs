@@ -1,0 +1,77 @@
+<div class="row justify-content-between mt-4">
+    <div class="col">
+        <h2>Rumah Makan</h2>
+    </div>
+    <div class="col-3">
+      <form method="GET" action="/pembeli/logout">
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')">Logout</button>
+      </form>
+  </div>
+</div>
+<hr>
+<div class="row justify-content-center mt-4">
+    <div class="col">
+        <a style="text-decoration: none;" href="/pembeli">
+            <h5 class="text-secondary">Kembali</h5>
+        </a>
+    </div>
+</div>
+<div class="row justify-content-center mt-4" style="overflow: auto;height: 350px;">
+  <table class="table">
+    <thead class="table-secondary text-center">
+          <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">Menu</th> -->
+            <th scope="col">Nama</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Jumlah</th>
+            <th scope="col">Sub-Total</th>
+          </tr>
+        </thead>
+        <tbody class="align-middle text-center">
+            <% data.forEach((keranjang, i) => { %>
+                <tr>
+                  <th scope="row"><%= i+1 %></th>
+                  <!-- <td>
+                      <img src="<%= keranjang.sourceGambar %>" alt="gambar_makanan" style="height: 100px; width: 100px;">
+                  </td> -->
+                  <td><%= keranjang.menu %></td>
+                  <td><%= keranjang.harga %></td>
+                  <!-- <td><%= keranjang.jumlah %></td> -->
+                  <td class="">
+                      <form class="d-inline" method="POST" action="/pembeli/kurangItem">
+                        <input type="hidden" name="keranjangId" value="<%= keranjang.keranjangId %>">
+                        <button type="submit" class="btn btn-secondary" style="width: 35px; height: 35px;">-</button>
+                      </form>
+                      <h5 class="d-inline">&emsp; <%= keranjang.jumlah %> &emsp;</h5>
+                      <form class="d-inline" method="POST" action="/pembeli/tambahItem">
+                        <input type="hidden" name="keranjangId" value="<%= keranjang.keranjangId %>">
+                        <button type="submit" class="btn btn-success" style="width: 35px; height: 35px;">+</button>
+                      </form>
+                  </td>
+                  <td><%= keranjang.total %></td>
+                </tr>
+            <% }) %>
+          </tbody>
+      </table>
+</div>
+<div class="row mt-4">
+    <div class="col">
+      <% if (data.length) { %>
+        <form method="POST" action="/pembeli/checkout">
+            <button type="submit" class="btn btn-success">Checkout!</button>
+          </form>
+      <% } else { %>
+        -
+      <% } %>
+    </div>
+    <div class="col text-center">
+      <h5>Total : 
+        <% if (data.length) { %>
+          <%= data.map(keranjang => keranjang.total).reduce((prev, next) => prev + next) %>  
+        <% } else { %>
+          0
+        <% } %>
+      </h5>
+    </div>
+</div>
