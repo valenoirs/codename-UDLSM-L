@@ -13,7 +13,7 @@ const PORT = 3000;
 
 // Session
 app.use(session({
-    secret: 'valenoirs',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
